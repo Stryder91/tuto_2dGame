@@ -15,10 +15,6 @@ class Overworld {
       // Establish the camera person
       // Now it's on hero but can change!
       const cameraPerson = this.map.gameObjects.hero;
-
-      // Update all objects
-      // Object.values(this.map.gameObjects).forEach(object => {
-      // });
       
       this.map.drawLowerImage(this.ctx, cameraPerson);
       

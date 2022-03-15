@@ -40,10 +40,10 @@ class Person extends GameObject {
 			if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
 				return;
 			}
-
 			// Ready to walk
 			state.map.moveWall(this.x, this.y, this.direction);
 			this.movingProgressRemaining = 16;
+			this.updateSprite(state);
 		}
 	}
 
@@ -51,6 +51,13 @@ class Person extends GameObject {
 		const [property, change] = this.directionUpdate[this.direction]
 		this[property] += change;
 		this.movingProgressRemaining -= 1;
+
+		if (this.movingProgressRemaining === 0) {
+			// We finished the walk
+			utils.emitEvent("PersonWalkingComplete", {
+				whoId: this.id
+			})
+		}
 	}
 
 	updateSprite(state) {
